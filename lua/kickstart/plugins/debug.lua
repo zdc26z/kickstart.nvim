@@ -49,6 +49,34 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    local devdir = 'devsites'
+    local cwd = vim.fn.getcwd()
+    local path = '/'
+
+    if string.find(cwd, devdir) then
+      local stop = false
+      for str in string.gmatch(cwd, '([^/]+)') do
+        path = path .. str .. '/'
+        if stop then
+          break
+        end
+        if str == devdir then
+          stop = true
+        end
+      end
+    end
+    dap.configurations.php = {
+      {
+        type = 'php',
+        request = 'launch',
+        name = 'Listen for Xdebug (9003)',
+        port = '9003',
+        log = true,
+        pathMappings = {
+          ['/app/'] = path,
+        },
+      },
+    }
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
@@ -64,6 +92,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'php',
       },
     }
 
