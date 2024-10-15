@@ -4,4 +4,6 @@
 -- See the kickstart.nvim README for more information
 return {
   'jwalton512/vim-blade',
+  'mustache/vim-mustache-handlebars',
+  'tpope/vim-fugitive',
 }
