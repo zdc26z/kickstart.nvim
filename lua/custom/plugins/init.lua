@@ -5,4 +5,8 @@
 
 ---@module 'lazy'
 ---@type LazySpec
-return {}
+return {
+  'jwalton512/vim-blade',
+  'mustache/vim-mustache-handlebars',
+  'tpope/vim-fugitive',
+}
